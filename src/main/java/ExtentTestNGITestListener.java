@@ -43,7 +43,12 @@ public class ExtentTestNGITestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        getTest().log(Status.FAIL, "Test Failed");
+        Throwable throwable = result.getThrowable();
+        if (throwable != null) {
+            getTest().log(Status.FAIL, throwable.getMessage());
+        } else {
+            getTest().log(Status.FAIL, "Test Failed");
+        }
     }
 
     @Override

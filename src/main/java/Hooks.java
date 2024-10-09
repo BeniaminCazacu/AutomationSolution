@@ -45,7 +45,8 @@ public class Hooks {
         // Navigating to the specified URL in the browser. 
         // This is the starting point for the tests, loading the web application under test.
         // driver.get("https://fasttrackit-test.netlify.app/#/");
-        driver.get("https://www.emag.ro/");
+//        driver.get("https://www.emag.ro/");
+        driver.get("https://fasttrackit-test.netlify.app/#/");
     }
 
     // Method annotated with @AfterMethod, indicating that it will run after each test method.
