@@ -86,23 +86,36 @@
     </dependency>
   </dependencies>
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
-        <configuration>
-          <proc>full</proc> <!-- Enables full annotation processing -->
-          <fork>true</fork>
-          <source>22</source>
-          <target>22</target>
-          <compilerArgs>
-            <arg>--add-opens</arg>
-            <arg>jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
-          </compilerArgs>
-        </configuration>
-      </plugin>
-    </plugins>
+  <plugins>
+  <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-compiler-plugin</artifactId>
+  <version>3.13.0</version>
+  <executions>
+  <execution>
+    <id>default-compile</id>
+    <goals>
+      <goal>compile</goal>
+    </goals>
+    <configuration>
+      <source>22</source> <!-- Adjust according to your Java version -->
+      <target>22</target> <!-- Adjust according to your Java version -->
+    </configuration>
+  </execution>
+  <execution>
+  <id>default-testCompile</id>
+  <goals>
+  <goal>testCompile</goal>
+  </goals>
+    <configuration>
+      <source>22</source> <!-- Adjust according to your Java version -->
+      <target>22</target> <!-- Adjust according to your Java version -->
+      <proc>full</proc> <!-- Enables full annotation processing during test compile -->
+    </configuration>
+  </execution>
+  </executions>
+  </plugin>
+  </plugins>
   </build>
   <properties>
     <maven.compiler.source>16</maven.compiler.source>
