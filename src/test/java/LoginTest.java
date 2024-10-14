@@ -1,5 +1,6 @@
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -75,6 +76,58 @@ public class LoginTest extends Hooks {
 
         Assert.assertEquals(actualProductNames, expectedProductNames, "The products are not sorted in reverse alphabetical order");
     }
-    //
+
+    @Test(description = "login to HAIVE")
+    public void loginToHaive() {
+        loginPage.clickAuthentificate();
+        wait.until(ExpectedConditions.visibilityOf(loginPage.onLoginPage()));
+        assertEquals(loginPage.onLoginPage().getText(), "Autentificare");
+        loginPage.setEmail();
+        loginPage.setPassword();
+        loginPage.clickSecondAuthentificate();
+        wait.until(ExpectedConditions.visibilityOf(loginPage.onDashboard()));
+        assertEquals(loginPage.onDashboard().getText(), "Vedeți cum merge afacerea dvs");
+    }
+
+    @Test(description = "Add a location in HAIVE")
+    public void addLocation() throws InterruptedException {
+        loginPage.loginToHaive();
+        loginPage.clickOnLocationsTab();
+        wait.until(ExpectedConditions.visibilityOf(loginPage.waitTextBeforeCreatingLocations()));
+        loginPage.clickOnCreateLocation();
+        wait.until(ExpectedConditions.visibilityOf(loginPage.waitTextAfterCreatingLocations()));
+//        Thread.sleep(2000);
+        loginPage.sendKeysWhenReady(loginPage.getName(), "Best of Town");
+//        loginPage.insertLocationName();
+        loginPage.insertLocationAddress();
+        loginPage.insertLocationCity();
+        loginPage.insertLocationPostcode();
+//        wait.until(ExpectedConditions.visibilityOf(loginPage.getLocationButton()));
+        ((JavascriptExecutor)driver).executeScript("window.scrollTo(700, 1333);");
+        Thread.sleep(5000);
+        loginPage.clickOnButtonCreateLocation();
+//        Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOf(loginPage.getNameOfLocation()));
+        assertEquals(loginPage.getNameOfLocation().getText(), "Best of Town");
+    }
+
+    @Test(description = "Log out from HAIVE")
+    public void logoutFromHaive() throws InterruptedException {
+        loginPage.loginToHaive();
+        loginPage.clickLogoutIcon();
+        wait.until(ExpectedConditions.visibilityOf(loginPage.getLogoutButton()));
+        loginPage.clickLogoutButton();
+    }
+
+    @Test(description = "Working with dashboard")
+    public void dashboard() throws InterruptedException {
+        loginPage.loginToHaive();
+//        wait.until(ExpectedConditions.visibilityOf(loginPage.getDate()));
+//        loginPage.clickDate();
+        loginPage.clickWhenReady(loginPage.getDate());
+        loginPage.clickPreviousMonth();
+        loginPage.clickDay1();
+        loginPage.clickDay3();
+    }
 }
 
