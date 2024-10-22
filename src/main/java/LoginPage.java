@@ -304,4 +304,71 @@ public class LoginPage extends BasePage {
     public WebElement getNameOfLocation() {
         return getLocationName;
     }
+
+    //Add menu in Haive
+
+    @FindBy(linkText = "Meniu")
+    private WebElement menu;
+
+    public void clickMenuTab() {
+        menu.click();
+    }
+
+    @FindBy(xpath = "//button[text()='Creați meniu']")
+    private WebElement createMenuFirstButton;
+
+    public void clickCreateMenuFirstButton() {
+        createMenuFirstButton.click();
+    }
+
+    @FindBy(id = "name")
+    private WebElement menuName;
+
+    public void insertMenuName() {
+        menuName.sendKeys("Burgers");
+    }
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement createMenuSecondButton;
+
+    public void clickCreateMenuSecondButton() {
+        createMenuSecondButton.click();
+    }
+
+    //Adding category to menu in Haive
+
+    @FindBy(xpath = "//*[text()='Burgers']")
+    private WebElement burgersButton;
+
+    public void clickBurgersButton() {
+        burgersButton.click();
+    }
+
+    @FindBy(xpath = "//*[text()='Categorie nouă']")
+    private WebElement newCategory;
+
+    public void clickNewCategory() {
+        newCategory.click();
+    }
+
+    @FindBy(xpath = "//input[@placeholder='ex: Antreuri']")
+    private WebElement categoryName;
+
+    public void insertCategoryName() {
+        categoryName.sendKeys("Burgeri mexicani");
+    }
+
+    @FindBy(xpath = "//button[text()='Creați']")
+    private WebElement createCategoryButton;
+
+    public void clickCreateCategoryButton() {
+        createCategoryButton.click();
+    }
+
+    @FindBy(xpath = "(//*[@class='lucide lucide-trash size-4 text-destructive'])[2]")
+    private WebElement deleteCategoryButton;
+
+    public void clickDeleteCategoryButton() {
+        deleteCategoryButton.click();
+    }
 }
