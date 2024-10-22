@@ -129,5 +129,31 @@ public class LoginTest extends Hooks {
         loginPage.clickDay1();
         loginPage.clickDay3();
     }
+
+    @Test(description = "Adding a menu in Haive")
+    public void addingMenu() throws InterruptedException {
+        loginPage.loginToHaive();
+        loginPage.clickMenuTab();
+        Thread.sleep(2000);
+        loginPage.clickCreateMenuFirstButton();
+        loginPage.insertMenuName();
+        loginPage.clickCreateMenuSecondButton();
+        Thread.sleep(3000);
+    }
+
+    @Test(description = "Adding a category to menu and deleting it")
+    public void addingCategoryToMenu() throws InterruptedException {
+        loginPage.loginToHaive();
+        loginPage.clickMenuTab();
+        Thread.sleep(3000);
+        loginPage.clickBurgersButton();
+        Thread.sleep(3000);
+        loginPage.clickNsewCategory();
+        loginPage.insertCategoryName();
+        loginPage.clickCreateCategoryButton();
+        Thread.sleep(3000);
+        loginPage.clickDeleteCategoryButton();
+        Thread.sleep(3000);
+    }
 }
 
